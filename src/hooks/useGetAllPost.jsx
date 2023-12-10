@@ -6,20 +6,16 @@ import { useSearchParams } from 'react-router-dom';
 const useGetAllPost = () => {
 	const [params] = useSearchParams();
 	const { query } = qs.parse(params.toString());
-	const {
-		data: posts,
-		isLoading,
-		isError,
-	} = useQuery({
+	const { data: posts, isLoading } = useQuery({
 		queryKey: ['allPost', query],
 		queryFn: async () => {
 			const res = await axios.get(
-				`http://hn.algolia.com/api/v1/search?query=${query}`
+				`https://hn.algolia.com/api/v1/search?query=${query}`
 			);
 			return res.data.hits;
 		},
 	});
-	return { posts, isLoading, isError };
+	return { posts, isLoading };
 };
 
 export default useGetAllPost;

@@ -1,12 +1,8 @@
 import PropTypes from 'prop-types';
 
-const AnimationContainer = ({ children, type }) => {
+const AnimationContainer = ({ children }) => {
 	return (
-		<div
-			className={`${
-				type === 'notFound' ? 'h-[60vh]' : 'h-[40vh]'
-			} flex  justify-center items-center`}
-		>
+		<div className={` h-[40vh] flex justify-center items-center`}>
 			{children}
 		</div>
 	);
@@ -14,7 +10,6 @@ const AnimationContainer = ({ children, type }) => {
 
 AnimationContainer.propTypes = {
 	children: PropTypes.node,
-	type: PropTypes.string.isRequired,
 };
 
 export default AnimationContainer;

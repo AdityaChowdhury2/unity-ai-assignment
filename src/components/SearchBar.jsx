@@ -7,10 +7,9 @@ import Skeleton from 'react-loading-skeleton';
 
 const SearchBar = () => {
 	const [searchText, setSearchText] = useState();
-	const [_params, setParams] = useSearchParams();
+	const [, setParams] = useSearchParams();
 	const { posts, isLoading } = useGetAllPost();
 	const handleSearch = e => {
-		console.log(e.target.value);
 		setParams({ query: e.target.value });
 		setSearchText(e.target.value);
 	};
@@ -42,7 +41,7 @@ const SearchBar = () => {
 								<Skeleton count={5} className="h-11" />
 							</p>
 						) : (
-							posts.slice(0, 10)?.map(news => {
+							posts?.slice(0, 10)?.map(news => {
 								return (
 									<li key={news.objectID} className="border-b-[1px] px-3 py-2">
 										<Link to={`/item/${news.objectID}`}>

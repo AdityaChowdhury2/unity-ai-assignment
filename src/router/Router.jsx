@@ -1,6 +1,7 @@
 import { createBrowserRouter } from 'react-router-dom';
 import MainLayout from '../Mainlayout/MainLayout';
 import Home from '../Pages/Home';
+import SinglePost from '../Pages/SinglePost';
 
 const Router = createBrowserRouter([
 	{
@@ -13,6 +14,7 @@ const Router = createBrowserRouter([
 			},
 			{
 				path: '/item/:id',
+				element: <SinglePost />,
 			},
 		],
 	},
