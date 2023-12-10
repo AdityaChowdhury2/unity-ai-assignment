@@ -1,12 +1,10 @@
-import { useState } from 'react';
+import useGetAllNews from '../hooks/useGetAllNews';
 
 const AllNews = () => {
-	const [showedNews, setShowedNews] = useState([]);
-	return (
-		<div>
-			<p> Hello I Am AllNews </p>
-		</div>
-	);
+	const { news, isLoading, isError } = useGetAllNews();
+	console.log(news);
+
+	return <div className="container"></div>;
 };
 
 export default AllNews;
