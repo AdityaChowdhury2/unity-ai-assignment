@@ -4,6 +4,7 @@ import './index.css';
 import { RouterProvider } from 'react-router-dom';
 import Router from './router/Router';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 const queryClient = new QueryClient();
 

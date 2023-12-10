@@ -1,14 +1,18 @@
 import { MdOutlineSearch } from 'react-icons/md';
 
-import useGetAllNews from '../hooks/useGetAllNews';
+import useGetAllPost from '../hooks/useGetAllPost';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useSearchParams } from 'react-router-dom';
+import Skeleton from 'react-loading-skeleton';
 
 const SearchBar = () => {
 	const [searchText, setSearchText] = useState();
-	const { news: allNews } = useGetAllNews();
+	const [_params, setParams] = useSearchParams();
+	const { posts, isLoading } = useGetAllPost();
 	const handleSearch = e => {
 		console.log(e.target.value);
+		setParams({ query: e.target.value });
+		setSearchText(e.target.value);
 	};
 
 	return (
@@ -26,18 +30,31 @@ const SearchBar = () => {
 					Search
 				</label>
 			</div>
-			<div className="bg-gray-50  rounded-b-md border">
-				<ul className="space-y-2 ">
-					{allNews?.length &&
-						allNews?.slice(0, 10)?.map(news => {
-							return (
-								<li key={news.objectID} className="border-b-[1px] px-3 py-2">
-									<Link to={`/item/${news.objectID}`}>
-										{news.story_title || news.title}
-									</Link>
-								</li>
-							);
-						})}
+			<div
+				className={`bg-gray-50 ${
+					searchText ? 'block' : 'hidden'
+				} rounded-b-md border`}
+			>
+				<ul className="space-y-2">
+					{searchText ? (
+						isLoading ? (
+							<p className="space-y-2">
+								<Skeleton count={5} className="h-11" />
+							</p>
+						) : (
+							posts.slice(0, 10)?.map(news => {
+								return (
+									<li key={news.objectID} className="border-b-[1px] px-3 py-2">
+										<Link to={`/item/${news.objectID}`}>
+											{news.story_title || news.title}
+										</Link>
+									</li>
+								);
+							})
+						)
+					) : (
+						<></>
+					)}
 				</ul>
 			</div>
 		</div>

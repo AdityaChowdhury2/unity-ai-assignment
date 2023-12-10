@@ -3,15 +3,15 @@ import axios from 'axios';
 import qs from 'query-string';
 import { useSearchParams } from 'react-router-dom';
 
-const useGetAllNews = () => {
+const useGetAllPost = () => {
 	const [params] = useSearchParams();
 	const { query } = qs.parse(params.toString());
 	const {
-		data: news,
+		data: posts,
 		isLoading,
 		isError,
 	} = useQuery({
-		queryKey: ['allNews', query],
+		queryKey: ['allPost', query],
 		queryFn: async () => {
 			const res = await axios.get(
 				`http://hn.algolia.com/api/v1/search?query=${query}`
@@ -19,7 +19,7 @@ const useGetAllNews = () => {
 			return res.data.hits;
 		},
 	});
-	return { news, isLoading, isError };
+	return { posts, isLoading, isError };
 };
 
-export default useGetAllNews;
+export default useGetAllPost;
